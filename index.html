@@ -3,152 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manoy Drone Operations Checklist</title>
+
+<title>Manoy Drone Operations</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background: #f4f6f8;
-    color: #222;
+    font-family: Arial, sans-serif;
+    background: #f3f4f6;
+    color: #111827;
 }
 
 header {
     background: #111827;
     color: white;
-    padding: 25px 20px;
+    padding: 22px;
     text-align: center;
 }
 
 header h1 {
-    margin: 0 0 8px;
+    margin: 0 0 5px;
 }
 
-header p {
-    margin: 0;
-    color: #d1d5db;
+nav {
+    display: flex;
+    overflow-x: auto;
+    background: #1f2937;
+}
+
+nav button {
+    flex: 1;
+    min-width: 120px;
+    padding: 14px;
+    border: none;
+    background: #1f2937;
+    color: white;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #374151;
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     padding: 20px;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
 }
 
 .card {
     background: white;
     padding: 20px;
-    margin: 18px 0;
+    margin-bottom: 20px;
     border-radius: 12px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
 .card h2 {
     margin-top: 0;
-    color: #111827;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button.primary {
+    background: #2563eb;
+    color: white;
+}
+
+button.success {
+    background: #16a34a;
+    color: white;
+}
+
+button.danger {
+    background: #dc2626;
+    color: white;
+}
+
+button.secondary {
+    background: #4b5563;
+    color: white;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.stat {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.stat h3 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.operation-card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #2563eb;
+}
+
+.operation-card h3 {
+    margin-top: 0;
 }
 
 .check-item {
     display: flex;
-    align-items: flex-start;
     gap: 10px;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.check-item:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .check-item input {
     width: 20px;
     height: 20px;
-    margin-top: 2px;
-    cursor: pointer;
+    margin: 0;
 }
 
-.check-item label {
-    cursor: pointer;
-    line-height: 1.5;
-}
-
-.progress-box {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-
-.progress-bar {
+.progress {
     width: 100%;
-    height: 18px;
+    height: 15px;
     background: #e5e7eb;
     border-radius: 10px;
     overflow: hidden;
+    margin: 15px 0;
 }
 
-.progress-fill {
+.progress-bar {
     height: 100%;
     width: 0%;
-    background: #2563eb;
-    transition: width 0.3s;
+    background: #16a34a;
 }
 
-.progress-text {
-    text-align: center;
-    margin-top: 8px;
-    font-weight: bold;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #2563eb;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-.reset-btn {
-    background: #dc2626;
-}
-
-.reset-btn:hover {
-    background: #b91c1c;
-}
-
-.status {
+.notice {
     padding: 15px;
-    margin-top: 15px;
     border-radius: 8px;
-    background: #f3f4f6;
-    font-weight: bold;
-    text-align: center;
-}
-
-.complete {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.warning {
     background: #fef3c7;
     color: #92400e;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    padding: 15px;
+    border-radius: 8px;
+    background: #dcfce7;
+    color: #166534;
+    margin-top: 15px;
+    display: none;
 }
 
 footer {
@@ -156,98 +199,366 @@ footer {
     padding: 30px;
     color: #6b7280;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <h1>Manoy Drone Operations</h1>
-    <p>Drone Operations, Flight & Mission Checklist</p>
+
+<h1>🚁 Manoy Drone Operations</h1>
+
+<p>Operations Management & Flight Checklist System</p>
+
 </header>
+
+
+<nav>
+
+<button onclick="showPage('dashboard')">
+🏠 Dashboard
+</button>
+
+<button onclick="showPage('newOperation')">
+➕ New Operation
+</button>
+
+<button onclick="showPage('checklist')">
+📋 Checklist
+</button>
+
+<button onclick="showPage('history')">
+📁 Operation History
+</button>
+
+</nav>
+
 
 <div class="container">
 
-<div class="progress-box">
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
 
-    <div class="progress-text" id="progressText">
-        0% Complete
-    </div>
-</div>
+<!-- DASHBOARD -->
 
+<div id="dashboard" class="page active">
 
-<!-- PRE-FLIGHT -->
 <div class="card">
-<h2>🚁 Pre-Flight Drone Checklist</h2>
 
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone body inspected – no cracks, damage, or loose parts</label>
-</div>
+<h2>🏠 Operations Dashboard</h2>
 
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Propellers inspected and properly installed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone battery fully charged and properly installed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Remote controller battery sufficiently charged</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Spare batteries available and checked</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Memory card installed and sufficient storage available</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone firmware and required software checked</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Flight area inspected for obstacles and hazards</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Take-off and landing area secured</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Landing pad deployed and properly positioned</label>
-</div>
+<p>
+Welcome to the Manoy Drone Operations Management System.
+</p>
 
 </div>
 
 
-<!-- CALIBRATION -->
+<div class="stats">
+
+<div class="stat">
+
+<h3 id="totalOperations">
+0
+</h3>
+
+<p>Total Operations</p>
+
+</div>
+
+
+<div class="stat">
+
+<h3 id="mappingOperations">
+0
+</h3>
+
+<p>Mapping</p>
+
+</div>
+
+
+<div class="stat">
+
+<h3 id="thermalOperations">
+0
+</h3>
+
+<p>Thermal Inspection</p>
+
+</div>
+
+
+<div class="stat">
+
+<h3 id="aerialOperations">
+0
+</h3>
+
+<p>Aerial Photo / Video</p>
+
+</div>
+
+</div>
+
+
 <div class="card">
-<h2>🎯 Drone & Camera Calibration</h2>
+
+<h2>⚡ Quick Actions</h2>
+
+<button class="action-btn primary"
+onclick="showPage('newOperation')">
+
+➕ Create New Operation
+
+</button>
+
+
+<button class="action-btn secondary"
+onclick="showPage('checklist')">
+
+📋 Open Equipment Checklist
+
+</button>
+
+
+<button class="action-btn secondary"
+onclick="showPage('history')">
+
+📁 View Operation History
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- NEW OPERATION -->
+
+<div id="newOperation" class="page">
+
+<div class="card">
+
+<h2>➕ Create New Operation</h2>
+
+<label>Operation ID</label>
+
+<input
+type="text"
+id="operationId"
+placeholder="Example: MANOY-2026-001"
+>
+
+
+<label>Date</label>
+
+<input
+type="date"
+id="operationDate"
+>
+
+
+<label>Client / Company</label>
+
+<input
+type="text"
+id="client"
+placeholder="Client name"
+>
+
+
+<label>Project Name</label>
+
+<input
+type="text"
+id="project"
+placeholder="Project name"
+>
+
+
+<label>Location</label>
+
+<input
+type="text"
+id="location"
+placeholder="Project location"
+>
+
+
+<label>Pilot in Command</label>
+
+<input
+type="text"
+id="pilot"
+placeholder="Pilot name"
+>
+
+
+<label>Drone / Aircraft</label>
+
+<input
+type="text"
+id="drone"
+placeholder="Example: DJI Matrice 4TD"
+>
+
+
+<label>Operation Type</label>
+
+<select id="operationType">
+
+<option value="">
+Select Operation Type
+</option>
+
+<option>
+Mapping
+</option>
+
+<option>
+Aerial Photography
+</option>
+
+<option>
+Aerial Videography
+</option>
+
+<option>
+Thermal Inspection
+</option>
+
+<option>
+Aerial Inspection
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+
+<label>Area / Project Size</label>
+
+<input
+type="text"
+id="area"
+placeholder="Example: 60 hectares"
+>
+
+
+<label>Mission Description</label>
+
+<textarea
+id="description"
+rows="5"
+placeholder="Describe the mission..."
+></textarea>
+
+
+<button
+class="action-btn success"
+onclick="saveOperation()"
+>
+
+💾 Save Operation
+
+</button>
+
+
+<button
+class="action-btn danger"
+onclick="clearOperationForm()"
+>
+
+🗑️ Clear Form
+
+</button>
+
+
+<div
+id="saveMessage"
+class="success-message"
+>
+
+✅ Operation successfully saved!
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- CHECKLIST -->
+
+<div id="checklist" class="page">
+
+<div class="card">
+
+<h2>📋 Equipment & Pre-Flight Checklist</h2>
+
+<div class="notice">
+
+⚠️ Check each item before operation. Calibration should only be performed when required based on equipment status and manufacturer guidance.
+
+</div>
+
+
+<div class="progress">
+
+<div
+id="checkProgress"
+class="progress-bar"
+></div>
+
+</div>
+
+<p id="checkProgressText">
+0% Complete
+</p>
+
+
+<h3>🚁 Drone / Aircraft</h3>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Drone IMU calibration checked / completed when required</label>
+<label>Drone body inspected</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Compass calibration checked / completed when required</label>
+<label>Propellers inspected</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Motors checked</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Drone battery checked</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Firmware verified</label>
+</div>
+
+
+<h3>🎯 Calibration</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>IMU status / calibration checked</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Compass status / calibration checked</label>
 </div>
 
 <div class="check-item">
@@ -257,39 +568,43 @@ footer {
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Camera focus checked and properly set</label>
+<label>Camera calibration / camera status checked</label>
+</div>
+
+
+<h3>📷 Camera / Payload</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Camera lens clean</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Camera exposure settings checked</label>
+<label>Camera focus checked</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>White balance checked</label>
+<label>Exposure settings checked</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Thermal camera settings checked (if applicable)</label>
+<label>SD card inserted and storage available</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Camera lens and sensors cleaned</label>
+<label>Thermal camera settings checked if applicable</label>
 </div>
 
-</div>
 
-
-<!-- POSITIONING -->
-<div class="card">
-<h2>📡 GPS / RTK / PPP Positioning</h2>
+<h3>📡 Positioning</h3>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>GPS signal and satellite count checked</label>
+<label>GPS / GNSS signal checked</label>
 </div>
 
 <div class="check-item">
@@ -299,418 +614,804 @@ footer {
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>RTK 3 / base station setup checked when applicable</label>
+<label>PPP workflow confirmed</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>PPP positioning workflow confirmed for current mission</label>
+<label>Home Point recorded</label>
+</div>
+
+
+<h3>🗺️ Mapping Equipment</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>GCP Tarp #1</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>NTRIP connection checked when required and available</label>
+<label>GCP Tarp #2</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Home Point successfully recorded</label>
-</div>
-
-</div>
-
-
-<!-- SAFETY PPE -->
-<div class="card">
-<h2>🦺 Safety Equipment & PPE</h2>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Hard hat available and worn when required</label>
+<label>GCP Tarp #3</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Snake gaiter / snake protection worn when operating in high-risk areas</label>
+<label>GCP Tarp #4</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Safety vest available and worn when required</label>
+<label>GCP Tarp #5</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Safety shoes / appropriate footwear used</label>
+<label>GCP Tarp #6</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>First aid kit available when required</label>
+<label>GCP Tarp #7</label>
+</div>
+
+
+<h3>🌤️ Weather Equipment</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Solar irradiance meter ready</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Emergency contact information available</label>
-</div>
-
-</div>
-
-
-<!-- WEATHER -->
-<div class="card">
-<h2>🌤️ Weather & Environmental Conditions</h2>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Weather forecast checked before operation</label>
+<label>Anemometer / wind meter ready</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Rain conditions checked</label>
+<label>Weather conditions checked</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Wind speed measured using anemometer</label>
+<label>Wind conditions within safe limits</label>
+</div>
+
+
+<h3>🦺 Safety Equipment</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Landing pad ready</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Wind conditions are within safe operating limits</label>
+<label>Snake gaiters / snake protection available when required</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Solar irradiance measured using solar irradiance meter when required</label>
+<label>Hard hat available when required</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Lighting conditions suitable for mission</label>
-</div>
-
-</div>
-
-
-<!-- MAPPING -->
-<div class="card">
-<h2>🗺️ Mapping Mission Checklist</h2>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Mission area and boundary confirmed</label>
+<label>Safety vest available</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Flight altitude confirmed</label>
+<label>Safety shoes / boots available</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Front overlap and side overlap confirmed</label>
+<label>First aid kit available</label>
+</div>
+
+
+<h3>💻 Data & Backup</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Spare SD card</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Flight speed confirmed</label>
+<label>Card reader</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>GCP Tarp – 7 pcs available and inspected</label>
+<label>Laptop ready</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>GCP positions planned and documented</label>
+<label>External SSD / HDD ready</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>GCP coordinates recorded when applicable</label>
+<label>Backup workflow prepared</label>
+</div>
+
+
+<h3>📄 Documents & Safety</h3>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Client / site authorization confirmed</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Mapping mission uploaded to drone</label>
+<label>Airspace requirements checked</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Survey area cleared for flight</label>
-</div>
-
-</div>
-
-
-<!-- AERIAL -->
-<div class="card">
-<h2>📸 Aerial Photography & Videography</h2>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Shot list / required angles confirmed</label>
+<label>Risk assessment completed</label>
 </div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Camera resolution and frame rate confirmed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Photo format / video format confirmed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Exposure and focus checked</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Required aerial shots completed</label>
-</div>
-
+<label>Emergency procedures reviewed</label>
 </div>
 
 
-<!-- THERMAL -->
-<div class="card">
-<h2>🌡️ Thermal Inspection</h2>
+<button
+class="action-btn success"
+onclick="checkChecklist()"
+>
 
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Thermal camera operational</label>
-</div>
+✅ Check Checklist Status
 
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Thermal settings and palette confirmed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Solar irradiance recorded when required</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Wind conditions recorded</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Inspection blocks / areas confirmed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Thermal anomalies documented</label>
-</div>
-
-</div>
-
-
-<!-- POST FLIGHT -->
-<div class="card">
-<h2>🛬 Post-Flight Checklist</h2>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone landed safely</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Motors stopped before handling drone</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone battery removed and stored safely</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Remote controller turned off</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Drone inspected after flight</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Flight logs saved</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Photos and videos backed up</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Mapping / thermal data backed up</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Post-flight report completed</label>
-</div>
-
-</div>
-
-
-<div class="card">
-<h2>📋 Mission Status</h2>
-
-<div id="status" class="status warning">
-Please complete all checklist items before closing the mission.
-</div>
-
-<button onclick="checkCompletion()">
-Check Mission Completion
 </button>
 
-<button class="reset-btn" onclick="resetChecklist()">
-Reset Checklist
+
+<button
+class="action-btn danger"
+onclick="resetChecklist()"
+>
+
+🔄 Reset Checklist
+
+</button>
+
+
+<div
+id="checkMessage"
+class="success-message"
+></div>
+
+</div>
+
+</div>
+
+
+
+<!-- HISTORY -->
+
+<div id="history" class="page">
+
+<div class="card">
+
+<h2>📁 Operation History</h2>
+
+<div id="operationHistory">
+
+<p>
+No operations recorded yet.
+</p>
+
+</div>
+
+<button
+class="action-btn danger"
+onclick="deleteAllOperations()"
+>
+
+🗑️ Delete All Operations
+
 </button>
 
 </div>
+
+</div>
+
 
 </div>
 
 
 <footer>
-Manoy Drone Operations | Internal Flight & Mission Checklist
+
+Manoy Drone Operations<br>
+
+Internal Operations Management System
+
 </footer>
 
 
 <script>
 
-const checkboxes = document.querySelectorAll('.check');
-const progressFill = document.getElementById('progressFill');
-const progressText = document.getElementById('progressText');
-const status = document.getElementById('status');
 
-function updateProgress() {
+/* PAGE NAVIGATION */
 
-    const total = checkboxes.length;
-    const completed = document.querySelectorAll('.check:checked').length;
+function showPage(pageId) {
 
-    const percentage = total === 0
-        ? 0
-        : Math.round((completed / total) * 100);
+    const pages =
+    document.querySelectorAll('.page');
 
-    progressFill.style.width = percentage + '%';
+    pages.forEach(function(page) {
 
-    progressText.textContent =
-        completed + ' of ' + total +
-        ' items completed (' + percentage + '%)';
+        page.classList.remove('active');
 
-    if (percentage === 100) {
-        status.className = 'status complete';
-        status.textContent =
-            '✅ Checklist Complete. Mission is ready for final operational confirmation.';
-    } else {
-        status.className = 'status warning';
-        status.textContent =
-            '⚠️ ' + (total - completed) +
-            ' checklist item(s) remaining.';
+    });
+
+    document
+    .getElementById(pageId)
+    .classList.add('active');
+
+    window.scrollTo(0,0);
+
+    if(pageId === 'dashboard') {
+
+        updateDashboard();
+
     }
+
+    if(pageId === 'history') {
+
+        displayOperations();
+
+    }
+
+}
+
+
+
+/* OPERATION STORAGE */
+
+function getOperations() {
+
+    return JSON.parse(
+        localStorage.getItem('manoyOperations')
+    ) || [];
+
+}
+
+
+
+/* SAVE OPERATION */
+
+function saveOperation() {
+
+    const operation = {
+
+        id:
+        document
+        .getElementById('operationId')
+        .value,
+
+        date:
+        document
+        .getElementById('operationDate')
+        .value,
+
+        client:
+        document
+        .getElementById('client')
+        .value,
+
+        project:
+        document
+        .getElementById('project')
+        .value,
+
+        location:
+        document
+        .getElementById('location')
+        .value,
+
+        pilot:
+        document
+        .getElementById('pilot')
+        .value,
+
+        drone:
+        document
+        .getElementById('drone')
+        .value,
+
+        type:
+        document
+        .getElementById('operationType')
+        .value,
+
+        area:
+        document
+        .getElementById('area')
+        .value,
+
+        description:
+        document
+        .getElementById('description')
+        .value,
+
+        createdAt:
+        new Date().toLocaleString()
+
+    };
+
+
+    if(
+        !operation.id ||
+        !operation.client ||
+        !operation.project ||
+        !operation.location ||
+        !operation.pilot ||
+        !operation.drone ||
+        !operation.type
+    ) {
+
+        alert(
+        'Please complete all required fields.'
+        );
+
+        return;
+
+    }
+
+
+    const operations =
+    getOperations();
+
+
+    operations.push(operation);
+
 
     localStorage.setItem(
-        'manoyDroneChecklist',
-        JSON.stringify(
-            Array.from(checkboxes).map(cb => cb.checked)
-        )
+        'manoyOperations',
+        JSON.stringify(operations)
     );
+
+
+    document
+    .getElementById('saveMessage')
+    .style.display = 'block';
+
+
+    setTimeout(function() {
+
+        document
+        .getElementById('saveMessage')
+        .style.display = 'none';
+
+    },3000);
+
+
+    updateDashboard();
+
 }
 
-function checkCompletion() {
 
-    const total = checkboxes.length;
-    const completed = document.querySelectorAll('.check:checked').length;
 
-    if (completed === total) {
+/* CLEAR FORM */
 
-        status.className = 'status complete';
+function clearOperationForm() {
 
-        status.textContent =
-            '✅ ALL CHECKLIST ITEMS COMPLETED. Mission checklist complete.';
+    document
+    .querySelectorAll(
+    '#newOperation input, #newOperation textarea'
+    )
+    .forEach(function(input) {
 
-        alert(
-            'Mission Checklist Complete!\\n\\n' +
-            'All checklist items have been completed.'
+        input.value = '';
+
+    });
+
+    document
+    .getElementById('operationType')
+    .value = '';
+
+}
+
+
+
+/* DASHBOARD */
+
+function updateDashboard() {
+
+    const operations =
+    getOperations();
+
+
+    document
+    .getElementById('totalOperations')
+    .textContent =
+    operations.length;
+
+
+    document
+    .getElementById('mappingOperations')
+    .textContent =
+    operations.filter(
+        op => op.type === 'Mapping'
+    ).length;
+
+
+    document
+    .getElementById('thermalOperations')
+    .textContent =
+    operations.filter(
+        op => op.type === 'Thermal Inspection'
+    ).length;
+
+
+    document
+    .getElementById('aerialOperations')
+    .textContent =
+    operations.filter(
+        op =>
+        op.type === 'Aerial Photography' ||
+        op.type === 'Aerial Videography'
+    ).length;
+
+}
+
+
+
+/* OPERATION HISTORY */
+
+function displayOperations() {
+
+    const operations =
+    getOperations();
+
+
+    const container =
+    document
+    .getElementById('operationHistory');
+
+
+    if(operations.length === 0) {
+
+        container.innerHTML =
+        '<p>No operations recorded yet.</p>';
+
+        return;
+
+    }
+
+
+    container.innerHTML = '';
+
+
+    operations
+    .slice()
+    .reverse()
+    .forEach(function(op) {
+
+
+        const card =
+        document
+        .createElement('div');
+
+
+        card.className =
+        'operation-card';
+
+
+        card.innerHTML = `
+
+        <h3>
+        ${op.project}
+        </h3>
+
+        <p>
+        <strong>Operation ID:</strong>
+        ${op.id}
+        </p>
+
+        <p>
+        <strong>Client:</strong>
+        ${op.client}
+        </p>
+
+        <p>
+        <strong>Location:</strong>
+        ${op.location}
+        </p>
+
+        <p>
+        <strong>Operation:</strong>
+        ${op.type}
+        </p>
+
+        <p>
+        <strong>Drone:</strong>
+        ${op.drone}
+        </p>
+
+        <p>
+        <strong>Pilot:</strong>
+        ${op.pilot}
+        </p>
+
+        <p>
+        <strong>Date:</strong>
+        ${op.date}
+        </p>
+
+        <p>
+        <strong>Area:</strong>
+        ${op.area || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Description:</strong>
+        ${op.description || 'N/A'}
+        </p>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+
+/* DELETE ALL */
+
+function deleteAllOperations() {
+
+    if(
+    confirm(
+    'Are you sure you want to delete all operation records?'
+    )
+    ) {
+
+        localStorage.removeItem(
+        'manoyOperations'
         );
+
+        displayOperations();
+
+        updateDashboard();
+
+    }
+
+}
+
+
+
+/* CHECKLIST */
+
+const checks =
+document
+.querySelectorAll('.check');
+
+
+function updateChecklistProgress() {
+
+    const total =
+    checks.length;
+
+
+    const completed =
+    document
+    .querySelectorAll(
+    '.check:checked'
+    ).length;
+
+
+    const percent =
+    total === 0
+    ? 0
+    : Math.round(
+    completed / total * 100
+    );
+
+
+    document
+    .getElementById(
+    'checkProgress'
+    )
+    .style.width =
+    percent + '%';
+
+
+    document
+    .getElementById(
+    'checkProgressText'
+    )
+    .textContent =
+    completed +
+    ' of ' +
+    total +
+    ' completed (' +
+    percent +
+    '%)';
+
+
+    localStorage.setItem(
+    'manoyChecklist',
+    JSON.stringify(
+    Array
+    .from(checks)
+    .map(
+    checkbox =>
+    checkbox.checked
+    )
+    )
+    );
+
+}
+
+
+
+/* CHECKLIST STATUS */
+
+function checkChecklist() {
+
+    const total =
+    checks.length;
+
+
+    const completed =
+    document
+    .querySelectorAll(
+    '.check:checked'
+    ).length;
+
+
+    const message =
+    document
+    .getElementById(
+    'checkMessage'
+    );
+
+
+    message.style.display =
+    'block';
+
+
+    if(
+    completed === total
+    ) {
+
+        message.className =
+        'success-message';
+
+
+        message.textContent =
+        '✅ All checklist items completed. Operation checklist is ready.';
 
     } else {
 
-        status.className = 'status warning';
+        message.className =
+        'success-message';
 
-        status.textContent =
-            '⚠️ Checklist incomplete. Please complete all required items.';
 
-        alert(
-            'Checklist Incomplete\\n\\n' +
-            (total - completed) +
-            ' item(s) still need to be completed.'
-        );
+        message.style.background =
+        '#fef3c7';
+
+
+        message.style.color =
+        '#92400e';
+
+
+        message.textContent =
+        '⚠️ ' +
+        (total - completed) +
+        ' checklist item(s) remaining.';
+
     }
+
 }
+
+
+
+/* RESET CHECKLIST */
 
 function resetChecklist() {
 
-    if (confirm('Reset all checklist items?')) {
+    if(
+    confirm(
+    'Reset the entire checklist?'
+    )
+    ) {
 
-        checkboxes.forEach(cb => {
-            cb.checked = false;
-        });
+        checks
+        .forEach(
+        checkbox =>
+        checkbox.checked = false
+        );
 
-        localStorage.removeItem('manoyDroneChecklist');
 
-        updateProgress();
+        localStorage.removeItem(
+        'manoyChecklist'
+        );
+
+
+        updateChecklistProgress();
+
     }
+
 }
+
+
+
+/* LOAD CHECKLIST */
 
 function loadChecklist() {
 
     const saved =
-        JSON.parse(
-            localStorage.getItem('manoyDroneChecklist')
-        );
+    JSON.parse(
+    localStorage.getItem(
+    'manoyChecklist'
+    )
+    );
 
-    if (saved) {
 
-        checkboxes.forEach((cb, index) => {
+    if(saved) {
 
-            if (saved[index] !== undefined) {
-                cb.checked = saved[index];
+        checks
+        .forEach(
+        (checkbox,index) => {
+
+            if(
+            saved[index] !== undefined
+            ) {
+
+                checkbox.checked =
+                saved[index];
+
             }
 
         });
 
     }
 
-    updateProgress();
+
+    updateChecklistProgress();
+
 }
 
-checkboxes.forEach(cb => {
 
-    cb.addEventListener(
-        'change',
-        updateProgress
+
+/* EVENTS */
+
+checks
+.forEach(
+checkbox => {
+
+    checkbox
+    .addEventListener(
+    'change',
+    updateChecklistProgress
     );
 
 });
 
+
+/* INITIAL LOAD */
+
 loadChecklist();
+
+updateDashboard();
 
 </script>
 
