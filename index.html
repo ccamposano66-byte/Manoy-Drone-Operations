@@ -4,10 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Manoy Drone Operations</title>
+<title>Manoy Drone Operations V3</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -38,12 +37,13 @@ nav {
 
 nav button {
     flex: 1;
-    min-width: 120px;
+    min-width: 130px;
     padding: 14px;
     border: none;
     background: #1f2937;
     color: white;
     cursor: pointer;
+    font-size: 14px;
 }
 
 nav button:hover {
@@ -51,7 +51,7 @@ nav button:hover {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
     padding: 20px;
 }
@@ -88,24 +88,12 @@ textarea {
     font-size: 16px;
 }
 
-button.primary {
-    background: #2563eb;
-    color: white;
+label {
+    font-weight: bold;
 }
 
-button.success {
-    background: #16a34a;
-    color: white;
-}
-
-button.danger {
-    background: #dc2626;
-    color: white;
-}
-
-button.secondary {
-    background: #4b5563;
-    color: white;
+button {
+    cursor: pointer;
 }
 
 .action-btn {
@@ -115,13 +103,38 @@ button.secondary {
     border: none;
     border-radius: 8px;
     font-size: 16px;
-    cursor: pointer;
+}
+
+.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.success {
+    background: #16a34a;
+    color: white;
+}
+
+.danger {
+    background: #dc2626;
+    color: white;
+}
+
+.secondary {
+    background: #4b5563;
+    color: white;
+}
+
+.warning {
+    background: #d97706;
+    color: white;
 }
 
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 15px;
+    margin-bottom: 20px;
 }
 
 .stat {
@@ -139,27 +152,33 @@ button.secondary {
 
 .operation-card {
     background: white;
-    padding: 18px;
+    padding: 20px;
     margin-bottom: 15px;
     border-radius: 10px;
     border-left: 5px solid #2563eb;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
 }
 
 .operation-card h3 {
     margin-top: 0;
 }
 
-.check-item {
+.operation-actions {
     display: flex;
-    gap: 10px;
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e7eb;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }
 
-.check-item input {
-    width: 20px;
-    height: 20px;
-    margin: 0;
+.operation-actions button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 7px;
+    color: white;
+}
+
+.search-box {
+    margin-bottom: 20px;
 }
 
 .progress {
@@ -175,6 +194,20 @@ button.secondary {
     height: 100%;
     width: 0%;
     background: #16a34a;
+    transition: width 0.3s;
+}
+
+.check-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.check-item input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
 }
 
 .notice {
@@ -194,147 +227,124 @@ button.secondary {
     display: none;
 }
 
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+}
+
 footer {
     text-align: center;
     padding: 30px;
     color: #6b7280;
 }
 
+@media print {
+
+    header,
+    nav,
+    footer,
+    .no-print,
+    .operation-actions {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .operation-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<h1>🚁 Manoy Drone Operations</h1>
-
-<p>Operations Management & Flight Checklist System</p>
-
+    <h1>🚁 Manoy Drone Operations</h1>
+    <p>Operations Management & Flight Checklist System</p>
+    <small>Version 3.0</small>
 </header>
 
-
 <nav>
-
-<button onclick="showPage('dashboard')">
-🏠 Dashboard
-</button>
-
-<button onclick="showPage('newOperation')">
-➕ New Operation
-</button>
-
-<button onclick="showPage('checklist')">
-📋 Checklist
-</button>
-
-<button onclick="showPage('history')">
-📁 Operation History
-</button>
-
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+    <button onclick="showPage('newOperation')">➕ New Operation</button>
+    <button onclick="showPage('checklist')">📋 Checklist</button>
+    <button onclick="showPage('history')">📁 Operation History</button>
 </nav>
-
 
 <div class="container">
 
-
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
 
 <div id="dashboard" class="page active">
 
-<div class="card">
+    <div class="card">
+        <h2>🏠 Operations Dashboard</h2>
+        <p>
+            Welcome to the Manoy Drone Operations Management System.
+        </p>
+    </div>
 
-<h2>🏠 Operations Dashboard</h2>
+    <div class="stats">
 
-<p>
-Welcome to the Manoy Drone Operations Management System.
-</p>
+        <div class="stat">
+            <h3 id="totalOperations">0</h3>
+            <p>Total Operations</p>
+        </div>
 
-</div>
+        <div class="stat">
+            <h3 id="mappingOperations">0</h3>
+            <p>Mapping</p>
+        </div>
 
+        <div class="stat">
+            <h3 id="thermalOperations">0</h3>
+            <p>Thermal Inspection</p>
+        </div>
 
-<div class="stats">
+        <div class="stat">
+            <h3 id="aerialOperations">0</h3>
+            <p>Aerial Photo / Video</p>
+        </div>
 
-<div class="stat">
+        <div class="stat">
+            <h3 id="inspectionOperations">0</h3>
+            <p>Aerial Inspection</p>
+        </div>
 
-<h3 id="totalOperations">
-0
-</h3>
+    </div>
 
-<p>Total Operations</p>
+    <div class="card">
+        <h2>⚡ Quick Actions</h2>
 
-</div>
+        <button class="action-btn primary"
+        onclick="showPage('newOperation')">
+            ➕ Create New Operation
+        </button>
 
+        <button class="action-btn secondary"
+        onclick="showPage('checklist')">
+            📋 Open Equipment Checklist
+        </button>
 
-<div class="stat">
-
-<h3 id="mappingOperations">
-0
-</h3>
-
-<p>Mapping</p>
-
-</div>
-
-
-<div class="stat">
-
-<h3 id="thermalOperations">
-0
-</h3>
-
-<p>Thermal Inspection</p>
-
-</div>
-
-
-<div class="stat">
-
-<h3 id="aerialOperations">
-0
-</h3>
-
-<p>Aerial Photo / Video</p>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>⚡ Quick Actions</h2>
-
-<button class="action-btn primary"
-onclick="showPage('newOperation')">
-
-➕ Create New Operation
-
-</button>
-
-
-<button class="action-btn secondary"
-onclick="showPage('checklist')">
-
-📋 Open Equipment Checklist
-
-</button>
-
-
-<button class="action-btn secondary"
-onclick="showPage('history')">
-
-📁 View Operation History
-
-</button>
-
-</div>
+        <button class="action-btn secondary"
+        onclick="showPage('history')">
+            📁 View Operation History
+        </button>
+    </div>
 
 </div>
 
 
-
-<!-- NEW OPERATION -->
+<!-- ================= NEW OPERATION ================= -->
 
 <div id="newOperation" class="page">
 
@@ -347,16 +357,19 @@ onclick="showPage('history')">
 <input
 type="text"
 id="operationId"
-placeholder="Example: MANOY-2026-001"
->
+placeholder="Automatic or Example: MANOY-2026-001">
 
+<button
+class="action-btn secondary"
+onclick="generateOperationID()">
+🔢 Generate Operation ID
+</button>
 
 <label>Date</label>
 
 <input
 type="date"
-id="operationDate"
->
+id="operationDate">
 
 
 <label>Client / Company</label>
@@ -364,8 +377,7 @@ id="operationDate"
 <input
 type="text"
 id="client"
-placeholder="Client name"
->
+placeholder="Client name">
 
 
 <label>Project Name</label>
@@ -373,8 +385,7 @@ placeholder="Client name"
 <input
 type="text"
 id="project"
-placeholder="Project name"
->
+placeholder="Project name">
 
 
 <label>Location</label>
@@ -382,17 +393,25 @@ placeholder="Project name"
 <input
 type="text"
 id="location"
-placeholder="Project location"
->
+placeholder="Project location">
 
 
-<label>Pilot in Command</label>
+<h3>👨‍✈️ Flight Crew</h3>
+
+<label>Pilot in Command (PIC)</label>
 
 <input
 type="text"
 id="pilot"
-placeholder="Pilot name"
->
+placeholder="PIC / Remote Pilot Name">
+
+
+<label>Visual Observer (VO)</label>
+
+<input
+type="text"
+id="vo"
+placeholder="Visual Observer Name">
 
 
 <label>Drone / Aircraft</label>
@@ -400,8 +419,7 @@ placeholder="Pilot name"
 <input
 type="text"
 id="drone"
-placeholder="Example: DJI Matrice 4TD"
->
+placeholder="Example: DJI Matrice 4TD">
 
 
 <label>Operation Type</label>
@@ -412,29 +430,17 @@ placeholder="Example: DJI Matrice 4TD"
 Select Operation Type
 </option>
 
-<option>
-Mapping
-</option>
+<option>Mapping</option>
 
-<option>
-Aerial Photography
-</option>
+<option>Aerial Photography</option>
 
-<option>
-Aerial Videography
-</option>
+<option>Aerial Videography</option>
 
-<option>
-Thermal Inspection
-</option>
+<option>Thermal Inspection</option>
 
-<option>
-Aerial Inspection
-</option>
+<option>Aerial Inspection</option>
 
-<option>
-Other
-</option>
+<option>Other</option>
 
 </select>
 
@@ -444,8 +450,7 @@ Other
 <input
 type="text"
 id="area"
-placeholder="Example: 60 hectares"
->
+placeholder="Example: 60 hectares">
 
 
 <label>Mission Description</label>
@@ -453,37 +458,26 @@ placeholder="Example: 60 hectares"
 <textarea
 id="description"
 rows="5"
-placeholder="Describe the mission..."
-></textarea>
+placeholder="Describe the mission...">
+</textarea>
 
 
 <button
 class="action-btn success"
-onclick="saveOperation()"
->
-
+onclick="saveOperation()">
 💾 Save Operation
-
 </button>
-
 
 <button
 class="action-btn danger"
-onclick="clearOperationForm()"
->
-
+onclick="clearOperationForm()">
 🗑️ Clear Form
-
 </button>
-
 
 <div
 id="saveMessage"
-class="success-message"
->
-
+class="success-message">
 ✅ Operation successfully saved!
-
 </div>
 
 </div>
@@ -491,8 +485,7 @@ class="success-message"
 </div>
 
 
-
-<!-- CHECKLIST -->
+<!-- ================= CHECKLIST ================= -->
 
 <div id="checklist" class="page">
 
@@ -501,18 +494,16 @@ class="success-message"
 <h2>📋 Equipment & Pre-Flight Checklist</h2>
 
 <div class="notice">
-
-⚠️ Check each item before operation. Calibration should only be performed when required based on equipment status and manufacturer guidance.
-
+⚠️ Check each item before operation.
+Calibration should only be performed when required based on equipment status and manufacturer guidance.
 </div>
-
 
 <div class="progress">
 
 <div
 id="checkProgress"
-class="progress-bar"
-></div>
+class="progress-bar">
+</div>
 
 </div>
 
@@ -770,36 +761,27 @@ class="progress-bar"
 
 <button
 class="action-btn success"
-onclick="checkChecklist()"
->
-
+onclick="checkChecklist()">
 ✅ Check Checklist Status
-
 </button>
-
 
 <button
 class="action-btn danger"
-onclick="resetChecklist()"
->
-
+onclick="resetChecklist()">
 🔄 Reset Checklist
-
 </button>
-
 
 <div
 id="checkMessage"
-class="success-message"
-></div>
-
+class="success-message">
 </div>
 
 </div>
 
+</div>
 
 
-<!-- HISTORY -->
+<!-- ================= HISTORY ================= -->
 
 <div id="history" class="page">
 
@@ -807,54 +789,75 @@ class="success-message"
 
 <h2>📁 Operation History</h2>
 
+<input
+type="text"
+id="searchOperation"
+class="search-box"
+placeholder="🔍 Search by Operation ID, Client, Project, PIC, VO, Location..."
+oninput="displayOperations()">
+
+
+<select
+id="filterOperation"
+onchange="displayOperations()">
+
+<option value="All">
+All Operation Types
+</option>
+
+<option>Mapping</option>
+
+<option>Aerial Photography</option>
+
+<option>Aerial Videography</option>
+
+<option>Thermal Inspection</option>
+
+<option>Aerial Inspection</option>
+
+<option>Other</option>
+
+</select>
+
+
 <div id="operationHistory">
 
-<p>
+<p class="empty">
 No operations recorded yet.
 </p>
 
 </div>
 
 <button
-class="action-btn danger"
-onclick="deleteAllOperations()"
->
-
+class="action-btn danger no-print"
+onclick="deleteAllOperations()">
 🗑️ Delete All Operations
-
 </button>
 
 </div>
 
 </div>
 
-
 </div>
 
 
 <footer>
-
 Manoy Drone Operations<br>
-
-Internal Operations Management System
-
+Internal Operations Management System<br>
+Version 3.0
 </footer>
 
 
 <script>
 
-
-/* PAGE NAVIGATION */
+/* ================= PAGE NAVIGATION ================= */
 
 function showPage(pageId) {
 
-    const pages =
-    document.querySelectorAll('.page');
+    const pages = document.querySelectorAll('.page');
 
     pages.forEach(function(page) {
-
         page.classList.remove('active');
-
     });
 
     document
@@ -864,22 +867,17 @@ function showPage(pageId) {
     window.scrollTo(0,0);
 
     if(pageId === 'dashboard') {
-
         updateDashboard();
-
     }
 
     if(pageId === 'history') {
-
         displayOperations();
-
     }
 
 }
 
 
-
-/* OPERATION STORAGE */
+/* ================= STORAGE ================= */
 
 function getOperations() {
 
@@ -890,71 +888,62 @@ function getOperations() {
 }
 
 
+/* ================= GENERATE OPERATION ID ================= */
 
-/* SAVE OPERATION */
+function generateOperationID() {
+
+    const year = new Date().getFullYear();
+
+    const operations = getOperations();
+
+    const number = String(
+        operations.length + 1
+    ).padStart(3,'0');
+
+    document
+    .getElementById('operationId')
+    .value =
+    `MANOY-${year}-${number}`;
+
+}
+
+
+/* ================= SAVE OPERATION ================= */
 
 function saveOperation() {
 
     const operation = {
 
-        id:
-        document
-        .getElementById('operationId')
-        .value,
+        id: document.getElementById('operationId').value.trim(),
 
-        date:
-        document
-        .getElementById('operationDate')
-        .value,
+        date: document.getElementById('operationDate').value,
 
-        client:
-        document
-        .getElementById('client')
-        .value,
+        client: document.getElementById('client').value.trim(),
 
-        project:
-        document
-        .getElementById('project')
-        .value,
+        project: document.getElementById('project').value.trim(),
 
-        location:
-        document
-        .getElementById('location')
-        .value,
+        location: document.getElementById('location').value.trim(),
 
-        pilot:
-        document
-        .getElementById('pilot')
-        .value,
+        pilot: document.getElementById('pilot').value.trim(),
 
-        drone:
-        document
-        .getElementById('drone')
-        .value,
+        vo: document.getElementById('vo').value.trim(),
 
-        type:
-        document
-        .getElementById('operationType')
-        .value,
+        drone: document.getElementById('drone').value.trim(),
 
-        area:
-        document
-        .getElementById('area')
-        .value,
+        type: document.getElementById('operationType').value,
 
-        description:
-        document
-        .getElementById('description')
-        .value,
+        area: document.getElementById('area').value.trim(),
 
-        createdAt:
-        new Date().toLocaleString()
+        description: document.getElementById('description').value.trim(),
+
+        createdAt: new Date().toLocaleString()
 
     };
 
 
     if(
         !operation.id ||
+        !operation.date ||
         !operation.client ||
         !operation.project ||
         !operation.location ||
@@ -972,12 +961,9 @@ function saveOperation() {
     }
 
 
-    const operations =
-    getOperations();
-
+    const operations = getOperations();
 
     operations.push(operation);
-
 
     localStorage.setItem(
         'manoyOperations',
@@ -1004,20 +990,20 @@ function saveOperation() {
 }
 
 
-
-/* CLEAR FORM */
+/* ================= CLEAR FORM ================= */
 
 function clearOperationForm() {
 
     document
     .querySelectorAll(
-    '#newOperation input, #newOperation textarea'
+        '#newOperation input, #newOperation textarea'
     )
     .forEach(function(input) {
 
         input.value = '';
 
     });
+
 
     document
     .getElementById('operationType')
@@ -1026,13 +1012,11 @@ function clearOperationForm() {
 }
 
 
-
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 
 function updateDashboard() {
 
-    const operations =
-    getOperations();
+    const operations = getOperations();
 
 
     document
@@ -1066,27 +1050,83 @@ function updateDashboard() {
         op.type === 'Aerial Videography'
     ).length;
 
+
+    document
+    .getElementById('inspectionOperations')
+    .textContent =
+    operations.filter(
+        op =>
+        op.type === 'Aerial Inspection'
+    ).length;
+
 }
 
 
-
-/* OPERATION HISTORY */
+/* ================= OPERATION HISTORY ================= */
 
 function displayOperations() {
 
-    const operations =
-    getOperations();
-
+    const operations = getOperations();
 
     const container =
+    document.getElementById(
+        'operationHistory'
+    );
+
+
+    const search =
     document
-    .getElementById('operationHistory');
+    .getElementById(
+        'searchOperation'
+    )
+    .value
+    .toLowerCase();
 
 
-    if(operations.length === 0) {
+    const filter =
+    document
+    .getElementById(
+        'filterOperation'
+    )
+    .value;
+
+
+    const filtered =
+    operations.filter(function(op) {
+
+        const text = `
+
+            ${op.id}
+            ${op.client}
+            ${op.project}
+            ${op.location}
+            ${op.pilot}
+            ${op.vo}
+            ${op.drone}
+            ${op.type}
+
+        `.toLowerCase();
+
+
+        const matchesSearch =
+        text.includes(search);
+
+
+        const matchesFilter =
+        filter === 'All' ||
+        op.type === filter;
+
+
+        return matchesSearch &&
+        matchesFilter;
+
+    });
+
+
+    if(filtered.length === 0) {
 
         container.innerHTML =
-        '<p>No operations recorded yet.</p>';
+        '<p class="empty">No matching operations found.</p>';
 
         return;
 
@@ -1096,16 +1136,13 @@ function displayOperations() {
     container.innerHTML = '';
 
 
-    operations
+    filtered
     .slice()
     .reverse()
     .forEach(function(op) {
 
-
         const card =
-        document
-        .createElement('div');
-
+        document.createElement('div');
 
         card.className =
         'operation-card';
@@ -1113,54 +1150,80 @@ function displayOperations() {
 
         card.innerHTML = `
 
-        <h3>
-        ${op.project}
-        </h3>
+            <h3>🚁 ${escapeHTML(op.project)}</h3>
 
-        <p>
-        <strong>Operation ID:</strong>
-        ${op.id}
-        </p>
+            <p>
+                <strong>Operation ID:</strong>
+                ${escapeHTML(op.id)}
+            </p>
 
-        <p>
-        <strong>Client:</strong>
-        ${op.client}
-        </p>
+            <p>
+                <strong>Client:</strong>
+                ${escapeHTML(op.client)}
+            </p>
 
-        <p>
-        <strong>Location:</strong>
-        ${op.location}
-        </p>
+            <p>
+                <strong>Location:</strong>
+                ${escapeHTML(op.location)}
+            </p>
 
-        <p>
-        <strong>Operation:</strong>
-        ${op.type}
-        </p>
+            <p>
+                <strong>Operation:</strong>
+                ${escapeHTML(op.type)}
+            </p>
 
-        <p>
-        <strong>Drone:</strong>
-        ${op.drone}
-        </p>
+            <p>
+                <strong>Drone / Aircraft:</strong>
+                ${escapeHTML(op.drone)}
+            </p>
 
-        <p>
-        <strong>Pilot:</strong>
-        ${op.pilot}
-        </p>
+            <p>
+                <strong>Pilot in Command (PIC):</strong>
+                ${escapeHTML(op.pilot)}
+            </p>
 
-        <p>
-        <strong>Date:</strong>
-        ${op.date}
-        </p>
+            <p>
+                <strong>Visual Observer (VO):</strong>
+                ${escapeHTML(op.vo || 'N/A')}
+            </p>
 
-        <p>
-        <strong>Area:</strong>
-        ${op.area || 'N/A'}
-        </p>
+            <p>
+                <strong>Date:</strong>
+                ${escapeHTML(op.date)}
+            </p>
 
-        <p>
-        <strong>Description:</strong>
-        ${op.description || 'N/A'}
-        </p>
+            <p>
+                <strong>Area / Project Size:</strong>
+                ${escapeHTML(op.area || 'N/A')}
+            </p>
+
+            <p>
+                <strong>Mission Description:</strong>
+                ${escapeHTML(op.description || 'N/A')}
+            </p>
+
+            <p>
+                <small>
+                Record Created:
+                ${escapeHTML(op.createdAt)}
+                </small>
+            </p>
+
+            <div class="operation-actions no-print">
+
+                <button
+                class="primary"
+                onclick="printOperation('${encodeURIComponent(op.id)}')">
+                🖨️ Print
+                </button>
+
+                <button
+                class="danger"
+                onclick="deleteOperation('${encodeURIComponent(op.id)}')">
+                🗑️ Delete
+                </button>
+
+            </div>
 
         `;
 
@@ -1172,19 +1235,75 @@ function displayOperations() {
 }
 
 
+/* ================= ESCAPE HTML ================= */
 
-/* DELETE ALL */
+function escapeHTML(value) {
+
+    const div =
+    document.createElement('div');
+
+    div.textContent =
+    value || '';
+
+    return div.innerHTML;
+
+}
+
+
+/* ================= DELETE SINGLE OPERATION ================= */
+
+function deleteOperation(encodedId) {
+
+    const id =
+    decodeURIComponent(encodedId);
+
+
+    if(
+        !confirm(
+            'Delete this operation record?'
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    let operations =
+    getOperations();
+
+
+    operations =
+    operations.filter(
+        op => op.id !== id
+    );
+
+
+    localStorage.setItem(
+        'manoyOperations',
+        JSON.stringify(operations)
+    );
+
+
+    displayOperations();
+
+    updateDashboard();
+
+}
+
+
+/* ================= DELETE ALL ================= */
 
 function deleteAllOperations() {
 
     if(
-    confirm(
-    'Are you sure you want to delete all operation records?'
-    )
+        confirm(
+            'Are you sure you want to delete ALL operation records?'
+        )
     ) {
 
         localStorage.removeItem(
-        'manoyOperations'
+            'manoyOperations'
         );
 
         displayOperations();
@@ -1196,12 +1315,170 @@ function deleteAllOperations() {
 }
 
 
+/* ================= PRINT OPERATION ================= */
 
-/* CHECKLIST */
+function printOperation(encodedId) {
+
+    const id =
+    decodeURIComponent(encodedId);
+
+
+    const operations =
+    getOperations();
+
+
+    const op =
+    operations.find(
+        operation =>
+        operation.id === id
+    );
+
+
+    if(!op) {
+
+        alert(
+            'Operation record not found.'
+        );
+
+        return;
+
+    }
+
+
+    const printWindow =
+    window.open(
+        '',
+        '_blank'
+    );
+
+
+    printWindow.document.write(`
+
+        <html>
+
+        <head>
+
+        <title>
+        Manoy Drone Operations Report
+        </title>
+
+        <style>
+
+        body {
+            font-family: Arial;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .line {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        </style>
+
+        </head>
+
+        <body>
+
+        <h1>
+        🚁 Manoy Drone Operations
+        </h1>
+
+        <h2>
+        Flight Operation Record
+        </h2>
+
+        <div class="line">
+        <strong>Operation ID:</strong>
+        ${escapeHTML(op.id)}
+        </div>
+
+        <div class="line">
+        <strong>Date:</strong>
+        ${escapeHTML(op.date)}
+        </div>
+
+        <div class="line">
+        <strong>Client / Company:</strong>
+        ${escapeHTML(op.client)}
+        </div>
+
+        <div class="line">
+        <strong>Project:</strong>
+        ${escapeHTML(op.project)}
+        </div>
+
+        <div class="line">
+        <strong>Location:</strong>
+        ${escapeHTML(op.location)}
+        </div>
+
+        <div class="line">
+        <strong>Operation Type:</strong>
+        ${escapeHTML(op.type)}
+        </div>
+
+        <div class="line">
+        <strong>Drone / Aircraft:</strong>
+        ${escapeHTML(op.drone)}
+        </div>
+
+        <div class="line">
+        <strong>Pilot in Command (PIC):</strong>
+        ${escapeHTML(op.pilot)}
+        </div>
+
+        <div class="line">
+        <strong>Visual Observer (VO):</strong>
+        ${escapeHTML(op.vo || 'N/A')}
+        </div>
+
+        <div class="line">
+        <strong>Area / Project Size:</strong>
+        ${escapeHTML(op.area || 'N/A')}
+        </div>
+
+        <div class="line">
+        <strong>Mission Description:</strong>
+        ${escapeHTML(op.description || 'N/A')}
+        </div>
+
+        <br><br>
+
+        <p>
+        Generated by Manoy Drone Operations Management System
+        </p>
+
+        <script>
+
+        window.onload = function() {
+            window.print();
+        };
+
+        <\/script>
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+}
+
+
+/* ================= CHECKLIST ================= */
 
 const checks =
-document
-.querySelectorAll('.check');
+document.querySelectorAll(
+    '.check'
+);
 
 
 function updateChecklistProgress() {
@@ -1211,9 +1488,8 @@ function updateChecklistProgress() {
 
 
     const completed =
-    document
-    .querySelectorAll(
-    '.check:checked'
+    document.querySelectorAll(
+        '.check:checked'
     ).length;
 
 
@@ -1221,13 +1497,13 @@ function updateChecklistProgress() {
     total === 0
     ? 0
     : Math.round(
-    completed / total * 100
+        completed / total * 100
     );
 
 
     document
     .getElementById(
-    'checkProgress'
+        'checkProgress'
     )
     .style.width =
     percent + '%';
@@ -1235,7 +1511,7 @@ function updateChecklistProgress() {
 
     document
     .getElementById(
-    'checkProgressText'
+        'checkProgressText'
     )
     .textContent =
     completed +
@@ -1247,22 +1523,26 @@ function updateChecklistProgress() {
 
 
     localStorage.setItem(
-    'manoyChecklist',
-    JSON.stringify(
-    Array
-    .from(checks)
-    .map(
-    checkbox =>
-    checkbox.checked
-    )
-    )
+
+        'manoyChecklist',
+
+        JSON.stringify(
+
+            Array
+            .from(checks)
+            .map(
+                checkbox =>
+                checkbox.checked
+            )
+
+        )
+
     );
 
 }
 
 
-
-/* CHECKLIST STATUS */
+/* ================= CHECKLIST STATUS ================= */
 
 function checkChecklist() {
 
@@ -1271,16 +1551,14 @@ function checkChecklist() {
 
 
     const completed =
-    document
-    .querySelectorAll(
-    '.check:checked'
+    document.querySelectorAll(
+        '.check:checked'
     ).length;
 
 
     const message =
-    document
-    .getElementById(
-    'checkMessage'
+    document.getElementById(
+        'checkMessage'
     );
 
 
@@ -1289,29 +1567,27 @@ function checkChecklist() {
 
 
     if(
-    completed === total
+        completed === total
     ) {
 
-        message.className =
-        'success-message';
+        message.style.background =
+        '#dcfce7';
 
+        message.style.color =
+        '#166534';
 
         message.textContent =
         '✅ All checklist items completed. Operation checklist is ready.';
 
-    } else {
+    }
 
-        message.className =
-        'success-message';
-
+    else {
 
         message.style.background =
         '#fef3c7';
 
-
         message.style.color =
         '#92400e';
-
 
         message.textContent =
         '⚠️ ' +
@@ -1323,26 +1599,24 @@ function checkChecklist() {
 }
 
 
-
-/* RESET CHECKLIST */
+/* ================= RESET CHECKLIST ================= */
 
 function resetChecklist() {
 
     if(
-    confirm(
-    'Reset the entire checklist?'
-    )
+        confirm(
+            'Reset the entire checklist?'
+        )
     ) {
 
-        checks
-        .forEach(
-        checkbox =>
-        checkbox.checked = false
+        checks.forEach(
+            checkbox =>
+            checkbox.checked = false
         );
 
 
         localStorage.removeItem(
-        'manoyChecklist'
+            'manoyChecklist'
         );
 
 
@@ -1353,35 +1627,34 @@ function resetChecklist() {
 }
 
 
-
-/* LOAD CHECKLIST */
+/* ================= LOAD CHECKLIST ================= */
 
 function loadChecklist() {
 
     const saved =
     JSON.parse(
-    localStorage.getItem(
-    'manoyChecklist'
-    )
+        localStorage.getItem(
+            'manoyChecklist'
+        )
     );
 
 
     if(saved) {
 
-        checks
-        .forEach(
-        (checkbox,index) => {
+        checks.forEach(
+            (checkbox,index) => {
 
-            if(
-            saved[index] !== undefined
-            ) {
+                if(
+                    saved[index] !== undefined
+                ) {
 
-                checkbox.checked =
-                saved[index];
+                    checkbox.checked =
+                    saved[index];
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -1391,23 +1664,31 @@ function loadChecklist() {
 }
 
 
+/* ================= EVENTS ================= */
 
-/* EVENTS */
+checks.forEach(
+    checkbox => {
 
-checks
-.forEach(
-checkbox => {
+        checkbox.addEventListener(
+            'change',
+            updateChecklistProgress
+        );
 
-    checkbox
-    .addEventListener(
-    'change',
-    updateChecklistProgress
-    );
-
-});
+    }
+);
 
 
-/* INITIAL LOAD */
+/* ================= INITIAL LOAD ================= */
+
+document
+.getElementById(
+    'operationDate'
+)
+.value =
+new Date()
+.toISOString()
+.split('T')[0];
+
 
 loadChecklist();
 
