@@ -12,7 +12,6 @@ content="width=device-width, initial-scale=1.0"
 
 <title>Manoy Drone Operations V4</title>
 
-<!-- PDF GENERATOR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -246,9 +245,7 @@ footer {
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -266,7 +263,6 @@ Version 4
 </p>
 
 </header>
-
 
 <nav>
 
@@ -288,13 +284,9 @@ Version 4
 
 </nav>
 
-
 <div class="container">
 
-
-<!-- ================================================= -->
 <!-- DASHBOARD -->
-<!-- ================================================= -->
 
 <div
 id="dashboard"
@@ -313,7 +305,6 @@ Welcome to the Manoy Drone Operations Management System.
 
 </div>
 
-
 <div class="stats">
 
 <div class="stat">
@@ -328,7 +319,6 @@ Total Operations
 
 </div>
 
-
 <div class="stat">
 
 <h3 id="mappingOperations">
@@ -341,7 +331,6 @@ Mapping
 
 </div>
 
-
 <div class="stat">
 
 <h3 id="thermalOperations">
@@ -353,7 +342,6 @@ Thermal Inspection
 </p>
 
 </div>
-
 
 <div class="stat">
 
@@ -369,13 +357,11 @@ Aerial Photo / Video
 
 </div>
 
-
 <div class="card">
 
 <h2>
 ⚡ Quick Actions
 </h2>
-
 
 <button
 class="action-btn primary"
@@ -386,7 +372,6 @@ onclick="showPage('newOperation')"
 
 </button>
 
-
 <button
 class="action-btn secondary"
 onclick="showPage('checklist')"
@@ -395,7 +380,6 @@ onclick="showPage('checklist')"
 📋 Open Equipment & Flight Checklist
 
 </button>
-
 
 <button
 class="action-btn secondary"
@@ -410,11 +394,7 @@ onclick="showPage('history')"
 
 </div>
 
-
-
-<!-- ================================================= -->
 <!-- NEW OPERATION -->
-<!-- ================================================= -->
 
 <div
 id="newOperation"
@@ -427,7 +407,6 @@ class="page"
 ➕ Create New Operation
 </h2>
 
-
 <label>
 Operation ID
 </label>
@@ -438,7 +417,6 @@ id="operationId"
 placeholder="Example: MANOY-2026-001"
 >
 
-
 <label>
 Date
 </label>
@@ -447,7 +425,6 @@ Date
 type="date"
 id="operationDate"
 >
-
 
 <label>
 Client / Company
@@ -459,7 +436,6 @@ id="client"
 placeholder="Client name"
 >
 
-
 <label>
 Project Name
 </label>
@@ -469,7 +445,6 @@ type="text"
 id="project"
 placeholder="Project name"
 >
-
 
 <label>
 Location
@@ -481,7 +456,6 @@ id="location"
 placeholder="Project location"
 >
 
-
 <label>
 Pilot in Command
 </label>
@@ -492,7 +466,6 @@ id="pilot"
 placeholder="Pilot name"
 >
 
-
 <label>
 Drone Observer
 </label>
@@ -502,7 +475,6 @@ type="text"
 id="observer"
 placeholder="Drone Observer name"
 >
-
 
 <label>
 Drone / Aircraft Used
@@ -544,7 +516,6 @@ DJI Flip
 
 </select>
 
-
 <label>
 Operation Type
 </label>
@@ -581,7 +552,6 @@ Other
 
 </select>
 
-
 <label>
 Area / Project Size
 </label>
@@ -591,7 +561,6 @@ type="text"
 id="area"
 placeholder="Example: 60 hectares"
 >
-
 
 <label>
 Mission Description
@@ -603,23 +572,17 @@ rows="5"
 placeholder="Describe the mission..."
 ></textarea>
 
-
-
-<!-- ================================================= -->
 <!-- PERMITS -->
-<!-- ================================================= -->
 
 <h3 class="section-title">
 📄 Permits & Authorizations
 </h3>
-
 
 <div class="notice">
 
 ⚠️ Select <strong>Yes</strong>, <strong>No</strong>, or <strong>N/A</strong> based on the requirements of the specific operation. Verify all applicable permits and authorizations before flight.
 
 </div>
-
 
 <div class="permit-box">
 
@@ -647,7 +610,6 @@ N/A
 
 </select>
 
-
 <label>
 CAAP Permit / Authorization
 </label>
@@ -671,7 +633,6 @@ N/A
 </option>
 
 </select>
-
 
 <label>
 Site Owner / Client Authorization
@@ -697,7 +658,6 @@ N/A
 
 </select>
 
-
 <label>
 Airspace Authorization / Clearance
 </label>
@@ -721,7 +681,6 @@ N/A
 </option>
 
 </select>
-
 
 <label>
 Other Permit / Document
@@ -747,7 +706,6 @@ N/A
 
 </select>
 
-
 <label>
 Permit / Reference Number
 </label>
@@ -758,7 +716,6 @@ id="permitReference"
 placeholder="Permit or reference number"
 >
 
-
 <label>
 Permit Expiry Date
 </label>
@@ -767,7 +724,6 @@ Permit Expiry Date
 type="date"
 id="permitExpiry"
 >
-
 
 <label>
 Permit Remarks
@@ -781,8 +737,6 @@ placeholder="Additional permit details or remarks..."
 
 </div>
 
-
-
 <button
 class="action-btn success"
 onclick="saveOperation()"
@@ -792,7 +746,6 @@ onclick="saveOperation()"
 
 </button>
 
-
 <button
 class="action-btn danger"
 onclick="clearOperationForm()"
@@ -801,7 +754,6 @@ onclick="clearOperationForm()"
 🗑️ Clear Form
 
 </button>
-
 
 <div
 id="saveMessage"
@@ -816,11 +768,7 @@ class="success-message"
 
 </div>
 
-
-
-<!-- ================================================= -->
 <!-- CHECKLIST -->
-<!-- ================================================= -->
 
 <div
 id="checklist"
@@ -833,7 +781,6 @@ class="page"
 📋 Complete Operation Checklist
 </h2>
 
-
 <div class="notice">
 
 ⚠️ Follow the sequence:
@@ -844,7 +791,6 @@ Equipment Check → Permit & Legal Compliance → Pre-Flight → Flight → Post
 
 </div>
 
-
 <div class="progress">
 
 <div
@@ -854,12 +800,9 @@ class="progress-bar"
 
 </div>
 
-
 <p id="checkProgressText">
 0% Complete
 </p>
-
-
 
 <!-- EQUIPMENT CHECK -->
 
@@ -867,13 +810,11 @@ class="progress-bar"
 📦 1. EQUIPMENT CHECK — BEFORE LOADING INTO VEHICLE
 </h3>
 
-
 <div class="notice">
 
 ⚠️ Check all equipment before loading into the vehicle to prevent forgotten equipment at the project site.
 
 </div>
-
 
 <div class="check-item">
 <input type="checkbox" class="check">
@@ -1005,14 +946,11 @@ class="progress-bar"
 <label>All required equipment loaded into vehicle</label>
 </div>
 
-
-
 <!-- PERMIT CHECK -->
 
 <h3 class="section-title">
 🛂 2. PERMIT & LEGAL COMPLIANCE CHECK
 </h3>
-
 
 <div class="check-item">
 <input type="checkbox" class="check">
@@ -1049,14 +987,21 @@ class="progress-bar"
 <label>Permit validity / expiry checked</label>
 </div>
 
-
-
 <!-- PRE FLIGHT -->
 
 <h3 class="section-title">
 🛫 3. PRE-FLIGHT CHECK — BEFORE TAKEOFF
 </h3>
 
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Gimbal cover removed before flight</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Gimbal rubber / gimbal lock removed before flight</label>
+</div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
@@ -1130,16 +1075,6 @@ class="progress-bar"
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Gimbal cover removed before flight</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Gimbal rubber / gimbal lock removed before flight</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
 <label>GPS / GNSS signal checked</label>
 </div>
 
@@ -1188,14 +1123,21 @@ class="progress-bar"
 <label>Landing pad properly positioned</label>
 </div>
 
-
-
 <!-- POST FLIGHT -->
 
 <h3 class="section-title">
 🛬 4. POST-FLIGHT CHECK — AFTER OPERATION
 </h3>
 
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Battery percentage checked after flight</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Battery level sufficient for safe RTH and landing — target at least 30% before RTH</label>
+</div>
 
 <div class="check-item">
 <input type="checkbox" class="check">
@@ -1272,7 +1214,6 @@ class="progress-bar"
 <label>All equipment returned and secured</label>
 </div>
 
-
 <button
 class="action-btn success"
 onclick="checkChecklist()"
@@ -1281,7 +1222,6 @@ onclick="checkChecklist()"
 ✅ Check Checklist Status
 
 </button>
-
 
 <button
 class="action-btn danger"
@@ -1292,7 +1232,6 @@ onclick="resetChecklist()"
 
 </button>
 
-
 <div
 id="checkMessage"
 class="success-message"
@@ -1302,11 +1241,7 @@ class="success-message"
 
 </div>
 
-
-
-<!-- ================================================= -->
 <!-- HISTORY -->
-<!-- ================================================= -->
 
 <div
 id="history"
@@ -1319,7 +1254,6 @@ class="page"
 📁 Operation History
 </h2>
 
-
 <div id="operationHistory">
 
 <p>
@@ -1327,7 +1261,6 @@ No operations recorded yet.
 </p>
 
 </div>
-
 
 <button
 class="action-btn danger"
@@ -1342,9 +1275,7 @@ onclick="deleteAllOperations()"
 
 </div>
 
-
 </div>
-
 
 <footer>
 
@@ -1354,20 +1285,14 @@ Internal Operations Management System
 
 </footer>
 
-
-
 <script>
 
-
-/* ================================================= */
 /* PAGE NAVIGATION */
-/* ================================================= */
 
 function showPage(pageId) {
 
     const pages =
     document.querySelectorAll('.page');
-
 
     pages.forEach(function(page) {
 
@@ -1375,21 +1300,17 @@ function showPage(pageId) {
 
     });
 
-
     document
     .getElementById(pageId)
     .classList.add('active');
 
-
     window.scrollTo(0,0);
-
 
     if(pageId === 'dashboard') {
 
         updateDashboard();
 
     }
-
 
     if(pageId === 'history') {
 
@@ -1400,10 +1321,7 @@ function showPage(pageId) {
 }
 
 
-
-/* ================================================= */
 /* STORAGE */
-/* ================================================= */
 
 function getOperations() {
 
@@ -1414,10 +1332,7 @@ function getOperations() {
 }
 
 
-
-/* ================================================= */
 /* SAVE OPERATION */
-/* ================================================= */
 
 function saveOperation() {
 
@@ -1548,9 +1463,7 @@ function saveOperation() {
     const operations =
     getOperations();
 
-
     operations.push(operation);
-
 
     localStorage.setItem(
         'manoyOperations',
@@ -1577,10 +1490,7 @@ function saveOperation() {
 }
 
 
-
-/* ================================================= */
 /* CLEAR FORM */
-/* ================================================= */
 
 function clearOperationForm() {
 
@@ -1632,10 +1542,7 @@ function clearOperationForm() {
 }
 
 
-
-/* ================================================= */
 /* DASHBOARD */
-/* ================================================= */
 
 function updateDashboard() {
 
@@ -1677,10 +1584,7 @@ function updateDashboard() {
 }
 
 
-
-/* ================================================= */
 /* OPERATION HISTORY */
-/* ================================================= */
 
 function displayOperations() {
 
@@ -1836,10 +1740,7 @@ function displayOperations() {
 }
 
 
-
-/* ================================================= */
 /* DELETE ALL */
-/* ================================================= */
 
 function deleteAllOperations() {
 
@@ -1864,15 +1765,11 @@ function deleteAllOperations() {
 }
 
 
-
-/* ================================================= */
 /* CHECKLIST */
-/* ================================================= */
 
 const checks =
 document
 .querySelectorAll('.check');
-
 
 
 function updateChecklistProgress() {
@@ -1932,10 +1829,7 @@ function updateChecklistProgress() {
 }
 
 
-
-/* ================================================= */
 /* CHECKLIST STATUS */
-/* ================================================= */
 
 function checkChecklist() {
 
@@ -2004,10 +1898,7 @@ function checkChecklist() {
 }
 
 
-
-/* ================================================= */
 /* RESET CHECKLIST */
-/* ================================================= */
 
 function resetChecklist() {
 
@@ -2036,10 +1927,7 @@ function resetChecklist() {
 }
 
 
-
-/* ================================================= */
 /* LOAD CHECKLIST */
-/* ================================================= */
 
 function loadChecklist() {
 
@@ -2076,10 +1964,7 @@ function loadChecklist() {
 }
 
 
-
-/* ================================================= */
 /* PDF REPORT */
-/* ================================================= */
 
 function generatePDFReport(index) {
 
@@ -2465,10 +2350,7 @@ function generatePDFReport(index) {
 }
 
 
-
-/* ================================================= */
 /* EVENTS */
-/* ================================================= */
 
 checks
 .forEach(
@@ -2483,17 +2365,13 @@ checkbox => {
 });
 
 
-
-/* ================================================= */
 /* INITIAL LOAD */
-/* ================================================= */
 
 loadChecklist();
 
 updateDashboard();
 
 </script>
-
 
 </body>
 
