@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -9,7 +10,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0"
 >
 
-<title>Manoy Drone Operations V3</title>
+<title>Manoy Drone Operations V4</title>
 
 <!-- PDF GENERATOR -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -222,6 +223,14 @@ button.secondary {
     color: white;
 }
 
+.permit-box {
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 15px;
+}
+
 footer {
     text-align: center;
     padding: 30px;
@@ -249,8 +258,11 @@ footer {
 Operations Management & Flight Checklist System
 </p>
 
-<p class="small-note" style="color:white;">
-Version 3
+<p
+class="small-note"
+style="color:white;"
+>
+Version 4
 </p>
 
 </header>
@@ -280,7 +292,9 @@ Version 3
 <div class="container">
 
 
-<!-- ================= DASHBOARD ================= -->
+<!-- ================================================= -->
+<!-- DASHBOARD -->
+<!-- ================================================= -->
 
 <div
 id="dashboard"
@@ -289,7 +303,9 @@ class="page active"
 
 <div class="card">
 
-<h2>🏠 Operations Dashboard</h2>
+<h2>
+🏠 Operations Dashboard
+</h2>
 
 <p>
 Welcome to the Manoy Drone Operations Management System.
@@ -306,7 +322,9 @@ Welcome to the Manoy Drone Operations Management System.
 0
 </h3>
 
-<p>Total Operations</p>
+<p>
+Total Operations
+</p>
 
 </div>
 
@@ -317,7 +335,9 @@ Welcome to the Manoy Drone Operations Management System.
 0
 </h3>
 
-<p>Mapping</p>
+<p>
+Mapping
+</p>
 
 </div>
 
@@ -328,7 +348,9 @@ Welcome to the Manoy Drone Operations Management System.
 0
 </h3>
 
-<p>Thermal Inspection</p>
+<p>
+Thermal Inspection
+</p>
 
 </div>
 
@@ -339,7 +361,9 @@ Welcome to the Manoy Drone Operations Management System.
 0
 </h3>
 
-<p>Aerial Photo / Video</p>
+<p>
+Aerial Photo / Video
+</p>
 
 </div>
 
@@ -348,7 +372,10 @@ Welcome to the Manoy Drone Operations Management System.
 
 <div class="card">
 
-<h2>⚡ Quick Actions</h2>
+<h2>
+⚡ Quick Actions
+</h2>
+
 
 <button
 class="action-btn primary"
@@ -385,7 +412,9 @@ onclick="showPage('history')"
 
 
 
-<!-- ================= NEW OPERATION ================= -->
+<!-- ================================================= -->
+<!-- NEW OPERATION -->
+<!-- ================================================= -->
 
 <div
 id="newOperation"
@@ -394,7 +423,9 @@ class="page"
 
 <div class="card">
 
-<h2>➕ Create New Operation</h2>
+<h2>
+➕ Create New Operation
+</h2>
 
 
 <label>
@@ -573,6 +604,185 @@ placeholder="Describe the mission..."
 ></textarea>
 
 
+
+<!-- ================================================= -->
+<!-- PERMITS -->
+<!-- ================================================= -->
+
+<h3 class="section-title">
+📄 Permits & Authorizations
+</h3>
+
+
+<div class="notice">
+
+⚠️ Select <strong>Yes</strong>, <strong>No</strong>, or <strong>N/A</strong> based on the requirements of the specific operation. Verify all applicable permits and authorizations before flight.
+
+</div>
+
+
+<div class="permit-box">
+
+<label>
+LGU Permit / Clearance
+</label>
+
+<select id="lguPermit">
+
+<option value="">
+Select Status
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+<option>
+N/A
+</option>
+
+</select>
+
+
+<label>
+CAAP Permit / Authorization
+</label>
+
+<select id="caapPermit">
+
+<option value="">
+Select Status
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+<option>
+N/A
+</option>
+
+</select>
+
+
+<label>
+Site Owner / Client Authorization
+</label>
+
+<select id="siteAuthorization">
+
+<option value="">
+Select Status
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+<option>
+N/A
+</option>
+
+</select>
+
+
+<label>
+Airspace Authorization / Clearance
+</label>
+
+<select id="airspaceAuthorization">
+
+<option value="">
+Select Status
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+<option>
+N/A
+</option>
+
+</select>
+
+
+<label>
+Other Permit / Document
+</label>
+
+<select id="otherPermit">
+
+<option value="">
+Select Status
+</option>
+
+<option>
+Yes
+</option>
+
+<option>
+No
+</option>
+
+<option>
+N/A
+</option>
+
+</select>
+
+
+<label>
+Permit / Reference Number
+</label>
+
+<input
+type="text"
+id="permitReference"
+placeholder="Permit or reference number"
+>
+
+
+<label>
+Permit Expiry Date
+</label>
+
+<input
+type="date"
+id="permitExpiry"
+>
+
+
+<label>
+Permit Remarks
+</label>
+
+<textarea
+id="permitRemarks"
+rows="4"
+placeholder="Additional permit details or remarks..."
+></textarea>
+
+</div>
+
+
+
 <button
 class="action-btn success"
 onclick="saveOperation()"
@@ -608,7 +818,9 @@ class="success-message"
 
 
 
-<!-- ================= CHECKLIST ================= -->
+<!-- ================================================= -->
+<!-- CHECKLIST -->
+<!-- ================================================= -->
 
 <div
 id="checklist"
@@ -625,8 +837,9 @@ class="page"
 <div class="notice">
 
 ⚠️ Follow the sequence:
+
 <strong>
-Equipment Check → Pre-Flight → Flight → Post-Flight
+Equipment Check → Permit & Legal Compliance → Pre-Flight → Flight → Post-Flight
 </strong>
 
 </div>
@@ -794,10 +1007,54 @@ class="progress-bar"
 
 
 
+<!-- PERMIT CHECK -->
+
+<h3 class="section-title">
+🛂 2. PERMIT & LEGAL COMPLIANCE CHECK
+</h3>
+
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>LGU Permit / Clearance verified if required</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>CAAP Permit / Authorization verified if required</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Site Owner / Client Authorization verified</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Airspace Authorization / Clearance verified if required</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Other required permits / documents verified</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Permit documents available for operation</label>
+</div>
+
+<div class="check-item">
+<input type="checkbox" class="check">
+<label>Permit validity / expiry checked</label>
+</div>
+
+
+
 <!-- PRE FLIGHT -->
 
 <h3 class="section-title">
-🛫 2. PRE-FLIGHT CHECK — BEFORE TAKEOFF
+🛫 3. PRE-FLIGHT CHECK — BEFORE TAKEOFF
 </h3>
 
 
@@ -918,16 +1175,6 @@ class="progress-bar"
 
 <div class="check-item">
 <input type="checkbox" class="check">
-<label>Client / site authorization confirmed</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
-<label>Airspace requirements checked</label>
-</div>
-
-<div class="check-item">
-<input type="checkbox" class="check">
 <label>Risk assessment completed</label>
 </div>
 
@@ -946,7 +1193,7 @@ class="progress-bar"
 <!-- POST FLIGHT -->
 
 <h3 class="section-title">
-🛬 3. POST-FLIGHT CHECK — AFTER OPERATION
+🛬 4. POST-FLIGHT CHECK — AFTER OPERATION
 </h3>
 
 
@@ -1057,7 +1304,9 @@ class="success-message"
 
 
 
-<!-- ================= HISTORY ================= -->
+<!-- ================================================= -->
+<!-- HISTORY -->
+<!-- ================================================= -->
 
 <div
 id="history"
@@ -1110,12 +1359,15 @@ Internal Operations Management System
 <script>
 
 
-/* ================= PAGE NAVIGATION ================= */
+/* ================================================= */
+/* PAGE NAVIGATION */
+/* ================================================= */
 
 function showPage(pageId) {
 
     const pages =
     document.querySelectorAll('.page');
+
 
     pages.forEach(function(page) {
 
@@ -1149,7 +1401,9 @@ function showPage(pageId) {
 
 
 
-/* ================= STORAGE ================= */
+/* ================================================= */
+/* STORAGE */
+/* ================================================= */
 
 function getOperations() {
 
@@ -1161,7 +1415,9 @@ function getOperations() {
 
 
 
-/* ================= SAVE OPERATION ================= */
+/* ================================================= */
+/* SAVE OPERATION */
+/* ================================================= */
 
 function saveOperation() {
 
@@ -1220,6 +1476,46 @@ function saveOperation() {
         description:
         document
         .getElementById('description')
+        .value,
+
+        lguPermit:
+        document
+        .getElementById('lguPermit')
+        .value,
+
+        caapPermit:
+        document
+        .getElementById('caapPermit')
+        .value,
+
+        siteAuthorization:
+        document
+        .getElementById('siteAuthorization')
+        .value,
+
+        airspaceAuthorization:
+        document
+        .getElementById('airspaceAuthorization')
+        .value,
+
+        otherPermit:
+        document
+        .getElementById('otherPermit')
+        .value,
+
+        permitReference:
+        document
+        .getElementById('permitReference')
+        .value,
+
+        permitExpiry:
+        document
+        .getElementById('permitExpiry')
+        .value,
+
+        permitRemarks:
+        document
+        .getElementById('permitRemarks')
         .value,
 
         createdAt:
@@ -1282,7 +1578,9 @@ function saveOperation() {
 
 
 
-/* ================= CLEAR FORM ================= */
+/* ================================================= */
+/* CLEAR FORM */
+/* ================================================= */
 
 function clearOperationForm() {
 
@@ -1306,11 +1604,38 @@ function clearOperationForm() {
     .getElementById('drone')
     .value = '';
 
+
+    document
+    .getElementById('lguPermit')
+    .value = '';
+
+
+    document
+    .getElementById('caapPermit')
+    .value = '';
+
+
+    document
+    .getElementById('siteAuthorization')
+    .value = '';
+
+
+    document
+    .getElementById('airspaceAuthorization')
+    .value = '';
+
+
+    document
+    .getElementById('otherPermit')
+    .value = '';
+
 }
 
 
 
-/* ================= DASHBOARD ================= */
+/* ================================================= */
+/* DASHBOARD */
+/* ================================================= */
 
 function updateDashboard() {
 
@@ -1353,7 +1678,9 @@ function updateDashboard() {
 
 
 
-/* ================= HISTORY ================= */
+/* ================================================= */
+/* OPERATION HISTORY */
+/* ================================================= */
 
 function displayOperations() {
 
@@ -1383,6 +1710,12 @@ function displayOperations() {
     .slice()
     .reverse()
     .forEach(function(op, index) {
+
+        const realIndex =
+        operations.length -
+        1 -
+        index;
+
 
         const card =
         document
@@ -1445,13 +1778,48 @@ function displayOperations() {
         </p>
 
         <p>
+        <strong>LGU Permit:</strong>
+        ${op.lguPermit || 'N/A'}
+        </p>
+
+        <p>
+        <strong>CAAP Authorization:</strong>
+        ${op.caapPermit || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Site / Client Authorization:</strong>
+        ${op.siteAuthorization || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Airspace Authorization:</strong>
+        ${op.airspaceAuthorization || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Other Permit:</strong>
+        ${op.otherPermit || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Permit Reference:</strong>
+        ${op.permitReference || 'N/A'}
+        </p>
+
+        <p>
+        <strong>Permit Expiry:</strong>
+        ${op.permitExpiry || 'N/A'}
+        </p>
+
+        <p>
         <strong>Description:</strong>
         ${op.description || 'N/A'}
         </p>
 
         <button
         class="action-btn report-btn"
-        onclick="generatePDFReport(${operations.length - 1 - index})"
+        onclick="generatePDFReport(${realIndex})"
         >
 
         📄 Generate PDF Report
@@ -1469,7 +1837,9 @@ function displayOperations() {
 
 
 
-/* ================= DELETE ALL ================= */
+/* ================================================= */
+/* DELETE ALL */
+/* ================================================= */
 
 function deleteAllOperations() {
 
@@ -1495,7 +1865,9 @@ function deleteAllOperations() {
 
 
 
-/* ================= CHECKLIST ================= */
+/* ================================================= */
+/* CHECKLIST */
+/* ================================================= */
 
 const checks =
 document
@@ -1561,7 +1933,9 @@ function updateChecklistProgress() {
 
 
 
-/* ================= CHECKLIST STATUS ================= */
+/* ================================================= */
+/* CHECKLIST STATUS */
+/* ================================================= */
 
 function checkChecklist() {
 
@@ -1595,6 +1969,14 @@ function checkChecklist() {
         'success-message';
 
 
+        message.style.background =
+        '#dcfce7';
+
+
+        message.style.color =
+        '#166534';
+
+
         message.textContent =
         '✅ All checklist items completed. Operation checklist is ready.';
 
@@ -1623,7 +2005,9 @@ function checkChecklist() {
 
 
 
-/* ================= RESET CHECKLIST ================= */
+/* ================================================= */
+/* RESET CHECKLIST */
+/* ================================================= */
 
 function resetChecklist() {
 
@@ -1653,7 +2037,9 @@ function resetChecklist() {
 
 
 
-/* ================= LOAD CHECKLIST ================= */
+/* ================================================= */
+/* LOAD CHECKLIST */
+/* ================================================= */
 
 function loadChecklist() {
 
@@ -1691,7 +2077,9 @@ function loadChecklist() {
 
 
 
-/* ================= PDF REPORT ================= */
+/* ================================================= */
+/* PDF REPORT */
+/* ================================================= */
 
 function generatePDFReport(index) {
 
@@ -1832,13 +2220,107 @@ function generatePDFReport(index) {
     doc.setFontSize(13);
 
     doc.text(
+    'Permits & Authorizations',
+    15,
+    y
+    );
+
+
+    y += 9;
+
+
+    doc.setFontSize(10);
+
+
+    const permitLines = [
+
+        'LGU Permit / Clearance: ' +
+        (op.lguPermit || 'N/A'),
+
+        'CAAP Permit / Authorization: ' +
+        (op.caapPermit || 'N/A'),
+
+        'Site Owner / Client Authorization: ' +
+        (op.siteAuthorization || 'N/A'),
+
+        'Airspace Authorization / Clearance: ' +
+        (op.airspaceAuthorization || 'N/A'),
+
+        'Other Permit / Document: ' +
+        (op.otherPermit || 'N/A'),
+
+        'Permit / Reference Number: ' +
+        (op.permitReference || 'N/A'),
+
+        'Permit Expiry Date: ' +
+        (op.permitExpiry || 'N/A')
+
+    ];
+
+
+    permitLines.forEach(function(line) {
+
+        const split =
+        doc.splitTextToSize(
+        line,
+        180
+        );
+
+
+        doc.text(
+        split,
+        15,
+        y
+        );
+
+
+        y +=
+        7 *
+        split.length;
+
+    });
+
+
+    if(op.permitRemarks) {
+
+        y += 3;
+
+
+        const remarks =
+        doc.splitTextToSize(
+        'Permit Remarks: ' +
+        op.permitRemarks,
+        180
+        );
+
+
+        doc.text(
+        remarks,
+        15,
+        y
+        );
+
+
+        y +=
+        7 *
+        remarks.length;
+
+    }
+
+
+    y += 8;
+
+
+    doc.setFontSize(13);
+
+    doc.text(
     'Checklist Status',
     15,
     y
     );
 
 
-    y += 8;
+    y += 9;
 
 
     doc.setFontSize(10);
@@ -1876,11 +2358,21 @@ function generatePDFReport(index) {
     );
 
 
-    y += 15;
+    y += 12;
 
 
     doc.text(
     'Equipment Check: Completed / Verified',
+    15,
+    y
+    );
+
+
+    y += 7;
+
+
+    doc.text(
+    'Permit & Legal Compliance: Completed / Verified',
     15,
     y
     );
@@ -1974,7 +2466,9 @@ function generatePDFReport(index) {
 
 
 
-/* ================= EVENTS ================= */
+/* ================================================= */
+/* EVENTS */
+/* ================================================= */
 
 checks
 .forEach(
@@ -1990,7 +2484,9 @@ checkbox => {
 
 
 
-/* ================= INITIAL LOAD ================= */
+/* ================================================= */
+/* INITIAL LOAD */
+/* ================================================= */
 
 loadChecklist();
 
@@ -2000,4 +2496,5 @@ updateDashboard();
 
 
 </body>
+
 </html>
